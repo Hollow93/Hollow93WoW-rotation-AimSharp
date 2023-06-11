@@ -1,0 +1,36 @@
+Hey guys,
+this is xKaneto from the A# Discord.
+
+Thank you for using out my Prot Warrior Rotation.
+When you are starting the rotation, the loader will show the following:
+
+These macros can be used for manual control:
+/xxxxx SaveCooldowns
+Toggles the use of big cooldowns on/off.
+/xxxxx AOE
+Toggles AOE mode on/off.
+
+Special Toggles for usage.
+/xxxxx StormBolt 
+Queues Storm Bolt up to be used on the next GCD.
+/xxxxx RallyingCry
+Queues Rallying Cry up to be used on the next GCD.
+/xxxxx IntimidatingShout
+Queues Intimidating Shout up to be used on the next GCD.
+"/xxxxx Shockwave 
+Queues Shockwave to be used on the next GCD.
+
+Replace xxxxx with first 5 letters of your addon, lowercase.
+Raid Talents: 3221211, M+ Talents: 3221233
+
+This rotation is optimized for usage of Venthyr and Kyrian Covenants.
+If you want others to be added, write a message in the Discord Feedback Channel with @xKaneto!
+
+Otherwise two things to be noted:
+Ravager and Spear of Bastion will be casted on your character.
+If you want to change that: Search for "@player" in your Rotation.cs file and change it to @cursor
+
+Feel free to ask me any questions and if you have feedback on the rotation, send me a message.
+
+Best Regards
+xKaneto

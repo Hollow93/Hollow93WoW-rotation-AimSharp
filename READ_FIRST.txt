@@ -1,0 +1,43 @@
+Important! To keep your account safe make sure you only run the Aimsharp loader when your WoW and Battle.net client is closed.
+
+Before you begin:
+
+Windows Desktop resolution needs to be at least 1920x1080.
+
+Make sure WoW is set to fullscreen windowed mode + 100% resolution scaling.
+
+Make sure WoW is on the English client. You can change this in Battle.net app settings -> game settings.
+
+Some addons like ElvUI may conflict with the bot.  You should disable all other addons the first time using the bot. If you are ElvUI user please visit our settings 
+guide we have included a way to do it. 
+
+The bot uses F1-F12 keys + the numbers + numpad + O,P,K,L for internal hotkeys so you will not be able to use these binds in game. If you want to keep your 
+1-8 keys please check the settings guide we have incuded a fast way to do it 
+
+1. Start legacy-loader.bat and press keys when asked.  This will start up AimsharpWow in our secure protected mode.
+	NOTE: You can also use headless-loader.bat and once the AimsharpWow server is running (black box) run headless-client.html to use our customizable UI.
+
+2. In AimsharpWow, click browse, set it to your WoW directory (for example, C:\Program Files\World of Warcraft)
+	-NOTE: do NOT select _retail_, just select the first WoW folder. For example, C:\Program Files\World of Warcraft
+
+3. Enter a name for the Aimsharp addon, can be anything.  You will need to enable this addon later in WoW.
+
+4. Select a class rotation and click load, then click configure to set it up.  Optionally you can add plugins to load as well.
+
+5. After configuring the settings, click start rotation.
+
+6. Log into WoW character select screen and enable the Aimsharp addon, then log in.  
+
+7. Once logged in, type /reload for the bot to set up it's keybinds.
+
+8. Good to go!
+
+Additional tips and troubleshooting: check our Settings guide
+
+Remember to /reload each time you start the bot so it can setup macros and keybinds.
+
+If you need more help, use our Discord channels.
+https://discord.gg/rdTtEyDvWt
+
+Any other problems or suggestions or requests?  Message us on Discord!
+https://discord.gg/rdTtEyDvWt

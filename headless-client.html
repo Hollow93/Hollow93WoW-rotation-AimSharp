@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="icon" type="image/x-icon" href="https://aimsharp.net/wp-content/uploads/2019/09/favicon.png">
+<link rel="stylesheet" href="https://aimsharp.net/wp-content/themes/aim-child/client_ui/style.css">
+<link rel="stylesheet" href="https://aimsharp.net/wp-content/themes/aim-child/client_ui/particles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+<script type="text/javascript" src="https://aimsharp.net/wp-content/themes/aim-child/client_ui/particles.js"></script>
+
+
+
+<body>
+    <div class="outer-title">
+        <h3 class="span loader">
+            <span class="m">A</span><span class="m">I</span><span class="m">M</span><span class="m">S</span><span
+                class="m">H</span><span class="m">A</span><span class="m">R</span><span class="m">P</span>
+            <!-- <span class="m">&nbsp;</span><span class="m">o</span><span class="m">f</span><span class="m">&nbsp;</span> -->
+            <span class="m">T</span><span class="m">E</span><span class="m">C</span><span class="m">H</span><span
+                class="m">N</span><span class="m">O</span><span class="m">L</span><span class="m">O</span><span
+                class="m">G</span><span class="m">I</span><span class="m">E</span><span class="m">S</span><span
+                class="m">
+        </h3>
+    </div>
+    <br>
+    <section id="wow-ui">
+        <div class="container-wow">
+            <form action="" method="post">
+                <div class="wow-box">
+                    <h1>WoW Client - Version 3.0.1</h1>
+                    <textarea id="outputText" readonly></textarea>
+
+                    <p class="label">Directory</p>
+                    <div class="input-box">
+                        <input class="" type="text" value="C:\Program Files (x86)\World of Warcraft" id="wowdirectory"></input>
+                    </div>
+                    <!-- <div class="input-box">
+    <input class="" type="file" webkitdirectory placeholder="Ex. C:\program files\wow" id="wowdirectory"></input>
+    </div> -->
+                    <!--<div class="input-box fileinputs">
+    <input type="file" webkitdirectory class="file" placeholder="WoW Directory" id="wowdirectory" />
+    </div>-->
+
+                    <p class="label">Addon Name</p>
+                    <div class="input-box">
+                        <input class="" type="text" value="SuperAuras" id="addonname"></input>
+                    </div>
+                    <div class="dropdown-wrapper wrapper">
+                        <div class="dropdown-box">
+                            <datalist id="rotations">
+                            </datalist>
+                            <input name="rotations" list="rotations" placeholder="Select Rotation... &#xF002;"
+                                   id="activerotation">
+                        </div>
+                        <div class="dropdown-box">
+                            <datalist id="plugins">
+                            </datalist>
+                            <input name="plugins" list="plugins" placeholder="Select Plugin... &#xF002;" id="addplugin">
+                        </div>
+                    </div>
+ 
+                    <div class="dropdown-wrapper wrapper">
+                        <div class="dropdown-box">
+                            <input name="plugins" id="activeplugins" readonly="true">
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="button-wrapper wrapper">
+                        <div class="button-box">
+                            <button type="button" class="button" id="load" style="--color:#1e9bff;">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>Load
+                            </button><br />
+                        </div>
+                        <div class="button-box">
+                            <button type="button" class="button" id="start" style="--color:#1eff4f;">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>Start
+                            </button><br />
+                        </div>
+                        <div class="button-box">
+                            <button type="button" class="button" id="stop" style="--color:#ffd61e;">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>Stop
+                            </button><br />
+                        </div>
+                        <div class="button-box">
+                            <button type="button" class="button" id="shutdown" style="--color:#ff401e;">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>Shutdown
+                            </button>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+<canvas class="background"></canvas>
+<script>
+    var textarea = document.getElementById('outputText');
+    var load = document.getElementById('load');
+    var start = document.getElementById('start');
+    var stop = document.getElementById('stop');
+    var shutdown = document.getElementById('shutdown');
+    var wowdirectory = document.getElementById('wowdirectory');
+    var addonname = document.getElementById('addonname');
+    var rotations = document.getElementById('rotations');
+    var plugins = document.getElementById('plugins');
+    var activerotation = document.getElementById('activerotation');
+    var addplugin = document.getElementById('addplugin');
+    var activeplugins = document.getElementById('activeplugins');
+
+    //Create a websocket to communicate with A#
+
+    writeToScreen(`Loading and connecting to A# server....` + '\n');
+
+    const wsUri = "ws://127.0.0.1:8000/";
+    const websocket = new WebSocket(wsUri);
+
+    var settingsString = "";
+
+    websocket.onopen = (e) => {
+        writeToScreen(`CONNECTED to A#.` + '\n');
+        websocket.send(`.settings`); //grab a# settings on connect
+    };
+
+    websocket.onclose = (e) => {
+        writeToScreen(`DISCONNECTED from A# UI. Refresh page to try to reconnect.` + '\n');
+    };
+
+    //Console messages
+    websocket.onmessage = (e) => {
+        //Do something with the A# settings json
+        if (`${e.data}`.startsWith(`.settings `)) {
+            //writeToScreen(`${e.data}`.substring(`${e.data}`.indexOf(' ') + 1)); //this example just prints it to the output
+
+            settingsString = `${e.data}`.substring(`${e.data}`.indexOf(' ') + 1);
+
+            const settingsArray = settingsString.split(";");
+            wowdirectory.value = settingsArray[0].split(":").slice(1).join(":");
+            addonname.value = settingsArray[1].split(":").slice(1).join(":");
+
+            for (const element of settingsArray[4].split(":").slice(1).join(":").split(',')) {
+                var newOptionElement = document.createElement("option");
+                newOptionElement.textContent = element;
+                rotations.appendChild(newOptionElement);
+            }
+
+            for (const element of settingsArray[5].split(":").slice(1).join(":").split(',')) {
+                var newOptionElement = document.createElement("option");
+                newOptionElement.textContent = element;
+                plugins.appendChild(newOptionElement);
+            }
+
+            activerotation.value = settingsArray[2].split(":").slice(1).join(":");
+            activeplugins.value = settingsArray[3].split(":").slice(1).join(":");
+
+        }
+
+        //Print console message to string
+        else {
+            writeToScreen(`${e.data}`);
+        }
+
+    };
+
+    websocket.onerror = (e) => {
+        writeToScreen(`ERROR: ${e.data}` + '\n');
+    };
+
+    //Loads current active rotation
+    load.onclick = () => {
+        websocket.send(`.wowdirectory ` + `${wowdirectory.value}`);
+        websocket.send(`.addonname ` + `${addonname.value}`);
+        websocket.send(`.setrotation ` + `${activerotation.value}`);
+        websocket.send(`.load`);
+    }
+
+    //Starts the loaded rotation
+    start.onclick = () => {
+        websocket.send(`.start`);
+    }
+
+    //Stops the running rotation
+    stop.onclick = () => {
+        websocket.send(`.stop`);
+    }
+
+    //Shutdown everything and exit A#
+    shutdown.onclick = () => {
+        websocket.send(`.shutdown`);
+    }
+
+    activerotation.onclick = () => {
+        activerotation.value = "";
+    }
+
+    addplugin.onchange = () => {
+        websocket.send(`.addplugin ` + `${addplugin.value}`);
+
+        activeplugins.value += addplugin.value + `,`;
+    } 
+
+    activeplugins.onclick = () => {
+        for (const element of activeplugins.value.split(",")) {
+            websocket.send(`.removeplugin ` + `${element}`);
+        }
+
+        activeplugins.value = "";
+    }
+
+    /* Some more commands not implemented in this example:
+    .wowdirectory <directory name>  -sets path to the WoW directory
+    .addonname <name>               -sets the A# addon name
+    .addplugin <plugin name>        -adds a plugin to the active plugins list
+    .removeplugin <plugin name>     -removes the active plugin from the active plugin list
+    .setrotation <rotation name>    -sets the current active rotation to be loaded and started
+    */
+
+
+
+
+    //Ping websocket to keep A# connection alive
+    //A# requires at lest one ping every 5000ms
+    setInterval(() => {
+        websocket.send(`ping`);
+    }, 2500);
+
+    function writeToScreen(message) {
+        textarea.value += message;
+    }
+
+    //This function keeps the textarea scrolled to bottom
+    setInterval(() => {
+        checkTextareaHeight();
+    }, 5000);
+
+    function checkTextareaHeight() {
+        var textarea = document.getElementById("outputText");
+        if (textarea.selectionStart == textarea.selectionEnd) {
+            textarea.scrollTop = textarea.scrollHeight;
+        }
+    }
+
+</script>
+
+</html>

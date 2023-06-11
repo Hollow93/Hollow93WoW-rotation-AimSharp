@@ -1,0 +1,52 @@
+Smart settings tool and tips that can be found usefull during your game play
+
+
+How to toggle on/off the bot : You can use in game macro, /xxxxx toggle" where xxxxx is the first 5 letters of your add-on name lower case to toggle the bot on/off.
+(Addon name called aimsharp --> /aimsh toggle ) 
+
+How to toggle AOE spells on (Its of by default): You can use in game macro, /xxxxx AOE where xxxxx is the first 5 letters of your add-on name with small letters. 
+(Addon name called aimsharp --> /aimsh AOE (AOE letters must be capitalized) 
+
+
+                                                                 Evlui add-on users
+
+This particular add-on is not compatible with aimsharp if not set properly. Make sure you navigate to your ElvUI settings and aplly the auto-scale option in order 
+to make the AimSharp compatible
+
+
+                                                                   
+   
+                                                                  ADVANCED SETTINGS
+You can add macro "/xxxxx wait #" which can be used to pause the bot for # seconds so you can use your own abilities without the bot interfering.
+For example, you can use:
+
+/xxxxx wait 2
+/cast Fel Rush
+
+on a Demon Hunter to pause the bot for 2 seconds, use Fel Rush, and then it will auto unpause after 2 seconds.
+As always, xxxxx is the first 5 letters of your addon name in small letters.
+
+
+
+Silent mode and extra keys.  -->> These settings can be used by advanced users.
+
+
+
+Silent mode disables all raid warnings and chat notifications from the bot to make it safer for streaming
+
+Extra keys disables keybinds 1-8 from the bot so you can use those for manual control.  To use these advanced settings, make a text file named Settings.txt in your AimsharpWow\bin directory and add these lines:
+
+Silent=true
+ExtraKeys=true
+
+
+You can also switch to WoW Classic/TBC Classic or WoW Beta by using the advanced setting
+
+WowBuild=classic 
+
+or
+
+WowBuild=beta 
+
+
+

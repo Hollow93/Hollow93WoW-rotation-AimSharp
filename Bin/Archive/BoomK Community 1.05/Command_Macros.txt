@@ -1,0 +1,33 @@
+<<<<Here comes some command supported in the rotation, replace ***** with your addon folder first 5 letters>>>>
+
+This will cast Ursol's vortex @cursor:
+#showtooltip Ursol's Vortex
+/***** Ursol 1
+
+This will cast Force of Nature:
+#Showtooltip Force of Nature
+/***** Trees 1
+
+This will cast Solar Beam @cursor
+#Showtooldtip Solar Beam
+/***** Beam 1
+
+
+This will Typhoon:
+#Showtooltip Typhoon
+/***** Typhoon 1
+
+This will Toggle AOE, you can keep the AOE on all time and the rotation will judge the situation.
+/***** AOE
+
+
+This will Save Trinkets, Celestial, Convoke, and Racials
+/***** SaveCooldowns
+
+
+This will activate autotargeting for moonfire spread below 5 enemies
+/***** AutoTarget 3.5
+
+
+--------------------------------------------------------------------------------------------------------------
+

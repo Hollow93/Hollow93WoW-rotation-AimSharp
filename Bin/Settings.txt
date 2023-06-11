@@ -1,0 +1,3 @@
+Silent=false
+ExtraKeys=false
+WowBuild=retail
